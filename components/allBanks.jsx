@@ -22,6 +22,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 
 import { fetchAllBanks } from "../apis";
+import { BASE_URL } from "../utility/constants";
 
 export default function AllBanks() {
   const { Search } = Input;
@@ -167,7 +168,7 @@ export default function AllBanks() {
 
 
   const handleCreateBank = async () => {
-    const apiUrl = "https://sea-turtle-app-7ta2e.ondigitalocean.app/api/identity/verify-account-name";
+    const apiUrl = `${BASE_URL}/identity/verify-account-name`;
     
     // Obtain values from the form inputs
     const accountNumber = document.getElementById("accountNumberInput").value;

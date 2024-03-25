@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://sea-turtle-app-7ta2e.ondigitalocean.app/api';
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://stingray-app-7fhj7.ondigitalocean.app/api";

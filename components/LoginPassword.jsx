@@ -13,6 +13,7 @@ import { OverlayContext } from './Layout';
 // import axios from '../apis/axiosConfig';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { BASE_URL } from '../utility/constants';
 
 
 const progressData = {
@@ -47,7 +48,7 @@ export default function LoginPassword() {
   const [loading, setLoading] = useState(false);
   const [message, setmessage] = useState('')
   const [csrfToken, setCsrfToken] = useState('');
-  const { setUserData, useData, setUser, setProgressIndicator, user} =
+  const { setUserData, useData, setUser, setProgressIndicator, user } =
     OverlayContext();
 
   const loginAccount = useMutation({
@@ -66,11 +67,14 @@ export default function LoginPassword() {
       password: values.password,
     };
 
+
     try {
       const res = await api.post(
-        'https://sea-turtle-app-7ta2e.ondigitalocean.app/api/user/login-admin',
+        `${BASE_URL}/user/login-admin`,
         payload
       );
+
+
       if (res) {
         console.log(res);
         Cookies.set('token', res?.token);
@@ -81,8 +85,6 @@ export default function LoginPassword() {
           'progressIndicator',
           JSON.stringify(progressData)
         );
-
-
 
         if (res?.token == null) {
           toast.error("Admin user already logged In")
@@ -206,7 +208,7 @@ export default function LoginPassword() {
               </Button>
             </Form.Item>
 
-            
+
           </Form>
         </div>
       </div>
