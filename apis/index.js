@@ -18,7 +18,6 @@ axios.interceptors.response.use(undefined, err => {
     if (err.response.status == 401) {
       toast.error('Please login to continue');
     } else {
-      console.log(err);
     }
   }
   if (err.response.status == 401) {
@@ -166,7 +165,6 @@ const api = {
 
   fetchSingleIncidents: (token, id) => {
     const headers = createHTTPHeader(token);
-    console.log("THE HEADER:", headers)
     const url = `${BASE_URL}/incident/incident/${id}`;
     return api.get(url, headers);
   },
@@ -174,7 +172,6 @@ const api = {
 
   fetchSingleUser: (token, id) => {
     const headers = createHTTPHeader(token);
-    console.log("THE HEADER:", headers)
     const url = `${BASE_URL}/admin/admin-user/${id}`;
     return api.get(url, headers);
   },

@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 export default function AdminMemberReport() {
   const onChange = e => {
-    console.log(`checked = ${e.target.checked}`);
   };
 
   const columns = [

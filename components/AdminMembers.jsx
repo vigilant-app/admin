@@ -81,7 +81,6 @@ export default function AdminMembers() {
   };
 
   const onFinish = (values) => {
-    console.log("Success:", values);
   };
 
   const onSearch = (value) => {

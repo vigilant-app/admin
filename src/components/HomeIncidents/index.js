@@ -10,6 +10,7 @@ import { OverlayContext } from '../../../components/Layout';
 import { IncidentsWrapper } from './styles';
 import { useQuery } from '@tanstack/react-query';
 import { BASE_URL } from '../../../utility/constants';
+import { adminEnum } from '../../enum/entity';
 
 
 
@@ -19,9 +20,7 @@ export default function HomeIncidents() {
   const [incidentsData, setIncidentsData] = useState([]);
   const router = useRouter();
   const { user } = OverlayContext();
-  const idString = user?.role.role_statuses.map(status => status.id).join(',')
-
-
+  const idString = user?.role.abilities.map(status => status.id).join(',')
 
 
 
@@ -205,19 +204,20 @@ export default function HomeIncidents() {
 
   // return api.fetchIncidents(null, { search_query });
   // return api.fetchNPFIncidents(null, { search_query });
-
+console.log("hikdfn",user);
   const { data: fetchIncidents, isLoading: loadingIncidents } = useQuery({
     queryKey: ['get_incidents', search_query],
     queryFn: () => {
-      return user?.entity_id === 2
+      return user?.entity_id === adminEnum.NPF
         ? api.fetchNPFIncidents(null, idString)
-        : user?.entity_id === 3
+        : user?.entity_id === adminEnum.VIGILANT
           ? api.fetchIncidents(null, { search_query })
-          : user?.entity_id === 4
-            ? api.fetchBanksIncidentByStatuses(null, user?.bank_id, user?.role.role_statuses[0].id)
+          : user?.entity_id === adminEnum.BANK
+            ? api.fetchBanksIncidentByStatuses(null, user?.bank_id, user?.role.abilities[0].id)
             : '';
     },
     onSuccess: data => {
+      console.log("incidentData",data)
       setIncidentsData(
         data?.data?.map((incident, index) => ({
           key: index,

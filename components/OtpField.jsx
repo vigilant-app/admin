@@ -50,7 +50,6 @@ const OTPField = () => {
 
             if (index === otp.length - 1) {
                 setLoading(true);
-
             }
         }
     };

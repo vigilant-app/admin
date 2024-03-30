@@ -32,6 +32,7 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import { OverlayContext } from './Layout';
 import { CSVLink } from 'react-csv';
+import { adminEnum } from '../src/enum/entity';
 
 
 
@@ -42,14 +43,13 @@ export default function TransactionReports() {
   const [showButton, setShowButton] = useState(false);
   const [incidentsData, setIncidentsData] = useState([]);
   const [paginatedIncidentsData, setPaginatedIncidentsData] = useState([]);
-  //const [search_query, setSearchQuery] = useState(null);
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [search_query, setSearchQuery] = useState(null);
   const [filteredIncidentsData, setFilteredIncidentsData] = useState([]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const { user } = OverlayContext();
-  const idString = user?.role.role_statuses.map(status => status.id).join(',')
+  const idString = user?.role.abilities.map(status => status.id).join(',')
 
   
   const handleSearchInputChange = e => {
@@ -61,11 +61,11 @@ export default function TransactionReports() {
   const filterData = () => {
     const filteredData = incidentsData.filter(item => {
       return (
-        item.incidents.toString().includes(searchQuery) ||
-        item.incidentID.toString().includes(searchQuery) ||
-        item.reportedby.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.transactionReference.toString().includes(searchQuery) ||
-        item.status.toLowerCase().includes(searchQuery.toLowerCase())
+        item.incidents.toString().includes(search_query) ||
+        item.incidentID.toString().includes(search_query) ||
+        item.reportedby.toLowerCase().includes(search_query.toLowerCase()) ||
+        item.transactionReference.toString().includes(search_query) ||
+        item.status.toLowerCase().includes(search_query.toLowerCase())
       );
     });
     setFilteredIncidentsData(filteredData);
@@ -175,12 +175,12 @@ export default function TransactionReports() {
   const { data: fetchIncidents, isLoading: loadingIncidents } = useQuery({
     queryKey: ['get_incidents'],
     queryFn: () => {
-      return user?.entity_id === 3
+      return user?.entity_id === adminEnum.VIGILANT
         ? api.fetchAllIncidents(null, { search_query })
-        : user?.entity_id === 2
+        : user?.entity_id === adminEnum.NPF
           ? api.fetchNPFIncidents(null, idString)
-          : user?.entity_id === 4
-            ? api.fetchBanksIncidentByStatuses(null, user?.bank_id, user?.role.role_statuses[0].id)
+          : user?.entity_id === adminEnum.BANK
+            ? api.fetchBanksIncidentByStatuses(null, user?.bank_id, user?.role.abilities[0].id)
             : "";
     },
     onSuccess: data => {
@@ -269,7 +269,7 @@ export default function TransactionReports() {
                 placeholder="Search by Username"
                 // onSearch={onSearch}
                 className="searching"
-                value={searchQuery}
+                value={search_query}
                 onChange={handleSearchInputChange}
               />
             </div>
@@ -310,7 +310,7 @@ export default function TransactionReports() {
               onRow={rowProps}
               pagination={pagination} // Add the pagination configuration here
               onChange={handleTableChange} // Handle pagination changes
-              dataSource={searchQuery ? filteredIncidentsData : paginatedIncidentsData}
+              dataSource={search_query ? filteredIncidentsData : paginatedIncidentsData}
 
             />
           )}

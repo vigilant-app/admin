@@ -20,6 +20,7 @@ import { SearchIcon, FilterIcon, DirLeft, DirRight } from "../utility/svg";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import axios from "axios";
+import defImg from "../public/icons/bankIcon.png"
 
 import { fetchAllBanks } from "../apis";
 import { BASE_URL } from "../utility/constants";
@@ -75,7 +76,6 @@ export default function AllBanks() {
   }, [currentPage, searchQuery]);
 
   const onFinish = (values) => {
-    console.log("Success:", values);
   };
 
   //Legacy Code base
@@ -91,7 +91,6 @@ export default function AllBanks() {
   };
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
     if (value === "all") {
       setPagination({ pageSize: 9999 });
     } else {
@@ -102,7 +101,6 @@ export default function AllBanks() {
   const onSearch = (value) => {
     // Handle search button click or use this value for any specific action.
     // You can remove the console.log if not needed.
-    console.log("Search query:", value);
     setSearchQuery(value); // Update searchQuery state with the entered query
   };
 
@@ -122,7 +120,7 @@ export default function AllBanks() {
         const bankData = await fetchAllBanks(token);
         setData(bankData.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        // console.error("Error fetching data:", error);
       }
     };
 
@@ -155,7 +153,7 @@ export default function AllBanks() {
       key: "bank_logo_url",
       render: (text) => (
         <div>
-          <Image src={text} alt="img" width={100} height={100} />
+          <Image src={text === null  ? defImg : text} alt="img" width={30} height={30} />
         </div>
       ),
     },
@@ -185,10 +183,10 @@ export default function AllBanks() {
     try {
       const response = await axios.post(apiUrl, payload);
       // Handle the response here (e.g., show a success message)
-      console.log("API Response:", response.data);
+      // console.log("API Response:", response.data);
     } catch (error) {
       // Handle errors (e.g., show an error message)
-      console.error("API Error:", error);
+      // console.error("API Error:", error);
     }
   };
   
@@ -201,7 +199,7 @@ export default function AllBanks() {
           <div className="col-auto">
             <h4 className="_tabs">Banks</h4>
           </div>
-          <div className="col-auto d-flex gap-4">
+          {/* <div className="col-auto d-flex gap-4">
             <Button
               icon={<AddIcon />}
               style={{ background: "#7D0003", color: "#fff" }}
@@ -209,7 +207,7 @@ export default function AllBanks() {
             >
               Add new Bank
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -61,7 +61,6 @@ export default function LoginPassword() {
 
   const onFinish = async values => {
     setLoading(true);
-
     const payload = {
       email: JSON.parse(secureLocalStorage.getItem('email')).email,
       password: values.password,
@@ -125,8 +124,6 @@ export default function LoginPassword() {
 
 
         }
-
-
       }
     } catch (error) {
       console.error(error);
@@ -207,8 +204,6 @@ export default function LoginPassword() {
                 )}
               </Button>
             </Form.Item>
-
-
           </Form>
         </div>
       </div>
