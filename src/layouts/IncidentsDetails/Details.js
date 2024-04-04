@@ -24,6 +24,7 @@ import { OverlayContext } from '../../../components/Layout';
 import api from '../../../apis';
 import { BASE_URL } from '../../../utility/constants';
 import Cookies from 'js-cookie';
+import { adminEnum } from '../../enum/entity';
 
 export default function Details({ data, incidentId }) {
   const [incidentModal, setIncidentModal] = useState(false);
@@ -332,7 +333,7 @@ export default function Details({ data, incidentId }) {
             <div className="col-6">
               <h4>Bank ID</h4>
               <p>{data?.bank?.bank_id}</p>
-
+              {console.log(data)}
               <h4>Reported By:</h4>
               <p>
                 {data?.user?.first_name} {data?.user?.last_name}
@@ -380,9 +381,9 @@ export default function Details({ data, incidentId }) {
       </div>
 
       <div className="actions">
-        {user?.entity_id === 3 ||
-          user?.entity_id === 4 ? (
-          <button className="btn" onClick={() => user?.entity_id == 3 ? setIncidentModal(true) : user?.entity_id == 4 ? setBanksModal(true) : ""}>
+        {user?.entity_id === adminEnum.VIGILANT ||
+          user?.entity_id === adminEnum.BANK ? (
+          <button className="btn" onClick={() => user?.entity_id == adminEnum.VIGILANT ? setIncidentModal(true) : user?.entity_id == adminEnum.BANK ? setBanksModal(true) : ""}>
             Assign
           </button>
         ) : (
@@ -391,15 +392,15 @@ export default function Details({ data, incidentId }) {
 
 
 
-        {user?.entity_id === 3 ||
-          user?.entity_id === 4 ? (
+        {user?.entity_id === adminEnum.VIGILANT ||
+          user?.entity_id === adminEnum.BANK ? (
           <button className="btn void" onClick={() => setVoidModal(true)}>Void</button>
         ) : (
           ''
         )}
 
-        {/* {user?.entity_id === 3 ||
-        user?.entity_id === 4 ? (
+        {/* {user?.entity_id === adminEnum.VIGILANT ||
+        user?.entity_id === adminEnum.BANK ? (
               <button className="btn void" onClick={()=>setVoidModal(true)}>Void</button>
         ): ""} */}
 
@@ -426,8 +427,8 @@ export default function Details({ data, incidentId }) {
               Void
             </Button>
           </>
-        ) : user?.entity_id === 3 ||
-          user?.entity_id === 4 ? (null) : (
+        ) : user?.entity_id === adminEnum.VIGILANT ||
+          user?.entity_id === adminEnum.BANK ? (null) : (
           <>
             <Button
               danger
@@ -577,7 +578,7 @@ export default function Details({ data, incidentId }) {
           >
             <Radio.Group>
               <Space direction="vertical">
-                {user?.entity_id === 3
+                {user?.entity_id === adminEnum.VIGILANT
                   // && user?.role?.name === 'VIGILANT CUSTOMER SERVICE'
                   ? VigilantAssignOption?.map((item, index) => (
                     <Radio value={item?.value} key={index}>

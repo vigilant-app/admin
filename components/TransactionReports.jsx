@@ -150,7 +150,7 @@ export default function TransactionReports() {
       title: 'Action',
       dataIndex: 'action',
       key: 'action',
-      render: text => <span className="image-action">Veiw</span>,
+      render: text => <span className="image-action" style={{border:"1px solid rgb(125, 0, 3)", color : "rgb(125, 0, 3)" , background : "rgba(125, 0, 3, 0.2)" , padding : "3px 12px" , cursor:"pointer" }}>Veiw</span>,
     },
   ];
 
@@ -184,12 +184,13 @@ export default function TransactionReports() {
             : "";
     },
     onSuccess: data => {
+      console.log("incidents",data);
       const mappedIncidents = data?.data?.map((incident, index) => ({
         key: index,
         incidents: index + 1,
         incidentID: incident?.incident?.id,
         reportedby: `${incident?.user?.first_name} ${incident?.user?.last_name}`,
-        datereported: incident?.incident?.created_at,
+        datereported: incident?.incident?.incident_date,
         transactionType: incident?.transaction?.name,
         transactionReference: generateRandom20DigitNumber(),
         status: incident?.incident?.status_name,
@@ -311,7 +312,6 @@ export default function TransactionReports() {
               pagination={pagination} // Add the pagination configuration here
               onChange={handleTableChange} // Handle pagination changes
               dataSource={search_query ? filteredIncidentsData : paginatedIncidentsData}
-
             />
           )}
 
