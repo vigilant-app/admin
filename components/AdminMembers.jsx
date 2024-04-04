@@ -127,12 +127,12 @@ export default function AdminMembers() {
   }, [token]);
 
   const AddAdminUser = async (values) => {
-    // console.log(
-      values.first_name,
-      values.last_name,
-      values.email,
-      values.phone_number
-    );
+    // // console.log(
+    //   values.first_name,
+    //   values.last_name,
+    //   values.email,
+    //   values.phone_number
+    // );
 
     setSunmitLoading(true);
    

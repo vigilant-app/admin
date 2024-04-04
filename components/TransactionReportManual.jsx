@@ -47,7 +47,7 @@ export default function TransactionReportManual() {
   const onFinish = values => {
     // console.log('Success:', values);
   };
-  const onSearch = value => // console.log(value);
+  const onSearch = value => console.log(value);
 
   const onChangeCheck = e => {
     // console.log('radio checked', e.target.value);

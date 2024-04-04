@@ -438,7 +438,7 @@ export default function ManageUsers() {
 
   // rsa end
 
-  const onSearch = value => // console.log(value);
+  const onSearch = value => console.log(value);
   const handleChange = value => {
     // console.log(`selected ${value}`);
   };

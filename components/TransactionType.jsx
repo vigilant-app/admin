@@ -110,7 +110,7 @@ export default function TransactionType() {
 
   const [form] = Form.useForm();
 
-  const onSearch = value => // console.log(value);
+  const onSearch = value => console.log(value);
 
   const lastPgae = () => {
     if (page <= 1) {
