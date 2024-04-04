@@ -21,8 +21,8 @@ export default function AdminUsersDetails() {
     const [data, setData] = useState([]);
     const token = Cookies.get('token');
 
-    console.log(token)
-    console.log(data)
+    // console.log(token)
+    // console.log(data)
 
 
     // const { data: fetcIncident, isLoading: loadingIncident } = useQuery({
@@ -34,7 +34,7 @@ export default function AdminUsersDetails() {
     //         setData(data?.data[0]);
     //     },
     //     onError: err => {
-    //         console.log(err);
+    //         // console.log(err);
     //     },
     // });
 

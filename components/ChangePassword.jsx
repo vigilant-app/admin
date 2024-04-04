@@ -22,10 +22,10 @@ export default function ChangePassword() {
       return;
     }
 
-    console.log('Success:', values);
+    // console.log('Success:', values);
 
     const payload = { remote: jsonToHex(values) };
-    console.log(payload);
+    // console.log(payload);
 
     try {
       const res = await api.post(
@@ -49,16 +49,16 @@ export default function ChangePassword() {
         router.push('/');
       }
 
-      console.log(res);
+      // console.log(res);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
   const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
+    // console.log('Failed:', errorInfo);
   };
 
   useEffect(() => {}, []);

@@ -67,8 +67,8 @@ export default function Details({ data, incidentId }) {
 
 
 
-  // console.log("ENTITY:", user.entity_id)
-  // console.log(VigilantAssignOption)
+  // // console.log("ENTITY:", user.entity_id)
+  // // console.log(VigilantAssignOption)
 
   function generateRandom20DigitNumber() {
     let randomNumber = '';
@@ -79,7 +79,7 @@ export default function Details({ data, incidentId }) {
   }
 
   const customerAssign = async values => {
-    console.log(values)
+    // console.log(values)
     setSunmitLoading(true);
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -128,7 +128,7 @@ export default function Details({ data, incidentId }) {
   };
 
   const assignBank = async values => {
-    console.log(values);
+    // console.log(values);
     setSunmitLoading(true);
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -182,11 +182,11 @@ export default function Details({ data, incidentId }) {
   }, [formAssign]);
 
   const confirm = e => {
-    console.log(e);
+    // console.log(e);
     message.success('Click on Yes');
   };
   const cancel = e => {
-    console.log(e);
+    // console.log(e);
     message.error('Click on No');
   };
 
@@ -320,9 +320,9 @@ export default function Details({ data, incidentId }) {
 
 
 
-  // console.log({ user });
+  // // console.log({ user });
 
-  // console.log({ data });
+  // // console.log({ data });
 
   return (
     <DetailsWrapper>

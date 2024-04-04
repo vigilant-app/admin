@@ -96,7 +96,7 @@ export default function AdminMembers() {
   
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
     if (value === "all") {
       setPagination({ pageSize: 9999 });
     } else {
@@ -105,11 +105,11 @@ export default function AdminMembers() {
   };
 
   const onChange = (e) => {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   };
 
   const onChangeCheck = (e) => {
-    console.log("radio checked", e.target.value);
+    // console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
 
@@ -127,7 +127,7 @@ export default function AdminMembers() {
   }, [token]);
 
   const AddAdminUser = async (values) => {
-    console.log(
+    // console.log(
       values.first_name,
       values.last_name,
       values.email,
@@ -155,9 +155,9 @@ export default function AdminMembers() {
         payload,
         headers
       );
-      console.log("API Response:", res);
+      // console.log("API Response:", res);
       if (res) {
-        console.log(res,"This is a window bbug")
+        // console.log(res,"This is a window bbug")
 
         toast.success(res.message);
         window.location.reload();
@@ -299,7 +299,7 @@ export default function AdminMembers() {
     };
   });
 
-  console.log(user?.role_id);
+  // console.log(user?.role_id);
 
   return (
     <section>

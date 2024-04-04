@@ -9,11 +9,11 @@ export default function CustomerSupport() {
   const router = useRouter();
 
   const onChange = key => {
-    console.log(key);
+    // console.log(key);
   };
 
   const onChangeCheck = value => {
-    console.log(value);
+    // console.log(value);
   };
 
   const usersPanel = (tag, actions) => (

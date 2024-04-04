@@ -41,24 +41,24 @@ export default function TransactionReportManualAuthorized() {
   const [createReport, setCreateReport] = useState(false);
 
   const handleChange = value => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
 
   const onFinish = values => {
-    console.log('Success:', values);
+    // console.log('Success:', values);
   };
-  const onSearch = value => console.log(value);
+  const onSearch = value => // console.log(value);
 
   const onChangeCheck = e => {
-    console.log('radio checked', e.target.value);
+    // console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
   const onChange = e => {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   };
 
   const onChanges = checkedValues => {
-    console.log('checked = ', checkedValues);
+    // console.log('checked = ', checkedValues);
   };
 
   const [indeterminate, setIndeterminate] = useState(true);

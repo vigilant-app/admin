@@ -47,24 +47,24 @@ export default function TransactionReportAuthorized() {
   const [currentStatus, setCurrentStatus] = useState('Awaiting Confirmation');
 
   const handleChange = value => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
 
   const onFinish = values => {
-    console.log('Success:', values);
+    // console.log('Success:', values);
   };
-  const onSearch = value => console.log(value);
+  const onSearch = value => // console.log(value);
 
   const onChangeCheck = e => {
-    console.log('radio checked', e.target.value);
+    // console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
   const onChange = e => {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   };
 
   const onChanges = checkedValues => {
-    console.log('checked = ', checkedValues);
+    // console.log('checked = ', checkedValues);
   };
 
   const [indeterminate, setIndeterminate] = useState(true);
@@ -343,7 +343,7 @@ export default function TransactionReportAuthorized() {
           }
         );
 
-        console.log(res);
+        // console.log(res);
         if (
           res?.data?.code === 'EXP_000' ||
           res?.data?.code === 'EXP_001' ||
@@ -356,13 +356,13 @@ export default function TransactionReportAuthorized() {
           res?.data?.code === 'EXP_008'
         ) {
           router.push('/');
-          console.log('oyah nah');
+          // console.log('oyah nah');
         }
 
         setLoading(false);
         setReportData(res?.data?.response?.data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       } finally {
         setLoading(false);
       }

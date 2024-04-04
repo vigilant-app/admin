@@ -19,19 +19,19 @@ export default function NavBar() {
 
   const token = Cookies.get('token');
   // const token = secureLocalStorage.getItem('token');
-  console.log(token)
+  // console.log(token)
 
   const router = useRouter();
 
   const [logoutModal, setLogoutModal] = useState(false);
 
-  console.log({
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json', // Adjust content type if needed
-    },
-  });
+  // console.log({
+  //   method: 'POST',
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //     'Content-Type': 'application/json', // Adjust content type if needed
+  //   },
+  // });
 
 
 
@@ -39,7 +39,7 @@ export default function NavBar() {
 
   const onFinish = async value => {
     setLoading(true);
-    console.log("Token inside unfinished:", token)
+    // console.log("Token inside unfinished:", token)
 
     const requestOptions = {
       method: 'POST',
@@ -56,7 +56,7 @@ export default function NavBar() {
         requestOptions
       );
       router.push('/');
-      console.log(res);
+      // console.log(res);
     } catch (error) {
       console.error(error);
     } finally {
@@ -75,7 +75,7 @@ export default function NavBar() {
 
     //   // Handle the response here if needed
     //   const responseData = await response.json(); // Parse response data if it's JSON
-    //   console.log('Response Data:', responseData);
+    //   // console.log('Response Data:', responseData);
     // } catch (error) {
     //   console.error('Error:', error);
     // }
@@ -97,9 +97,9 @@ export default function NavBar() {
       ),
     },
   ];
-  console.log(user);
+  // console.log(user);
 
-  console.log(token);
+  // console.log(token);
   return (
     <header>
       <nav className="container">

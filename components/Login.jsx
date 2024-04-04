@@ -32,7 +32,7 @@ export default function Login() {
   const onFinish = async values => {
     setLoading(true);
 
-    console.log('Success:', values);
+    // console.log('Success:', values);
 
     const binaryData = jsonToHex(values);
 
@@ -78,7 +78,7 @@ export default function Login() {
   };
 
   const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
+    // console.log('Failed:', errorInfo);
   };
 
   return (

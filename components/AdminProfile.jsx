@@ -18,7 +18,7 @@ export default function AdminProfile() {
   const router = useRouter();
 
   const onFinish = values => {
-    console.log('Success:', values);
+    // console.log('Success:', values);
     setTimeout(() => {
       setConfirmed(false);
     }, 1000);
@@ -26,7 +26,7 @@ export default function AdminProfile() {
   };
 
   const handleChange = value => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
 
   const deactivate = () => {
@@ -124,7 +124,7 @@ export default function AdminProfile() {
     setModalOpen(false);
   };
 
-  console.log(confirmDeactivation, isActive);
+  // console.log(confirmDeactivation, isActive);
 
   return (
     <div className="row user-profile admin-profile">

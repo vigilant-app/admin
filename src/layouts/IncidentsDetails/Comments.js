@@ -15,7 +15,7 @@ export default function Comments({ incidentId }) {
   const [commentText, setCommentText] = useState('');
   const token = Cookies.get('token');
   const { user } = OverlayContext();
-  console.log(incidentId)
+  // console.log(incidentId)
 
   const formatTimestamp = (timestamp) => {
     const formattedDate = new Date(timestamp).toLocaleString(); // You can adjust the format as needed

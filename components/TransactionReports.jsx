@@ -198,7 +198,7 @@ export default function TransactionReports() {
       setPaginatedIncidentsData(mappedIncidents); // Initialize paginatedIncidentsData
     },
     onError: err => {
-      console.log(err);
+      // console.log(err);
     },
     retry: false,
     refetchInterval: Infinity,

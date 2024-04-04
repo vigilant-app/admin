@@ -47,7 +47,7 @@ export default function VerifyAccountLayout() {
     };
 
     const payload = { remote: jsonToHex(tokenData) };
-    console.log(payload);
+    // console.log(payload);
 
     try {
       const res = await api.post(
@@ -72,7 +72,7 @@ export default function VerifyAccountLayout() {
         } else {
           // not a first timer login, and route to home page
           toast.success(res?.data?.message[0]);
-          console.log(res?.data?.response?.data?.profile);
+          // console.log(res?.data?.response?.data?.profile);
           setUser(res?.data?.response?.data?.profile);
           secureLocalStorage.setItem(
             'VigUser',
@@ -83,7 +83,7 @@ export default function VerifyAccountLayout() {
             'progressIndicator',
             JSON.stringify(res?.data?.response?.data?.progressIndicator)
           );
-          console.log(res?.data?.response?.data?.progressIndicator);
+          // console.log(res?.data?.response?.data?.progressIndicator);
           router.push('/dashboard');
         }
       } else if (res?.data?.code == 'VLT_003') {
@@ -98,7 +98,7 @@ export default function VerifyAccountLayout() {
         // do nothing
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(
         error?.response?.data?.data?.message[0] || 'error verifying token'
       );
@@ -117,7 +117,7 @@ export default function VerifyAccountLayout() {
     //     }
     //   );
 
-    // console.log( res );
+    // // console.log( res );
     // if (res) {
     //   toast.success(res.data || 'Account verified successfully');
     //   // router.push('/dashboard');
@@ -126,7 +126,7 @@ export default function VerifyAccountLayout() {
     // }
     // catch (error) {
     //   // toast.error(error?.response?.data?.message || 'Error verifying account');
-    //   console.log(error);
+    //   // console.log(error);
     //   setLoading(false);
     // } finally {
     //   setLoading(false);
@@ -153,13 +153,13 @@ export default function VerifyAccountLayout() {
         }
       );
 
-      console.log(res);
+      // console.log(res);
 
       if (res) {
         toast.success(res?.data?.message || 'Code resent successfully');
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error?.response?.data?.data?.message[0]);
     } finally {
       setLoading(false);

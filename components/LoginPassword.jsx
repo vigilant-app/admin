@@ -75,7 +75,7 @@ export default function LoginPassword() {
 
 
       if (res) {
-        console.log(res);
+        // console.log(res);
         Cookies.set('token', res?.token);
         setUser(res?.data);
         secureLocalStorage.setItem('user', JSON.stringify(res?.data));
@@ -97,7 +97,7 @@ export default function LoginPassword() {
           //     .get('https://sea-turtle-app-7ta2e.ondigitalocean.app/sanctum/csrf-cookie')
           //     .then(response => {
           //       // Once the CSRF cookie is set, you can make your authenticated requests.
-          //       console.log("THE CSRF TOKEN:", response)
+          //       // console.log("THE CSRF TOKEN:", response)
           //       axios
           //         .post('https://sea-turtle-app-7ta2e.ondigitalocean.app/user/two-factor-authentication', {
           //           withCredentials: false,
@@ -105,7 +105,7 @@ export default function LoginPassword() {
           //         })
           //         .then(response => {
           //           // Handle the response of your authenticated request.
-          //           console.log(response)
+          //           // console.log(response)
           //         })
           //         .catch(error => {
           //           // Handle errors.

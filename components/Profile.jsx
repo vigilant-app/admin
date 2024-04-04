@@ -29,7 +29,7 @@ export default function Profile({ activeStatus }) {
   };
 
   const onRadioChange = e => {
-    console.log('radio checked', e.target.value);
+    // console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
 
@@ -72,7 +72,7 @@ export default function Profile({ activeStatus }) {
   };
 
   const onFinish = () => {
-    console.log('nah so ');
+    // console.log('nah so ');
   };
 
   const DeactivatedModal = () => {

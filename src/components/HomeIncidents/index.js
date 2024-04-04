@@ -204,7 +204,7 @@ export default function HomeIncidents() {
 
   // return api.fetchIncidents(null, { search_query });
   // return api.fetchNPFIncidents(null, { search_query });
-console.log("hikdfn",user);
+// console.log("hikdfn",user);
   const { data: fetchIncidents, isLoading: loadingIncidents } = useQuery({
     queryKey: ['get_incidents', search_query],
     queryFn: () => {
@@ -217,7 +217,7 @@ console.log("hikdfn",user);
             : '';
     },
     onSuccess: data => {
-      console.log("incidentData",data)
+      // console.log("incidentData",data)
       setIncidentsData(
         data?.data?.map((incident, index) => ({
           key: index,
@@ -231,7 +231,7 @@ console.log("hikdfn",user);
       );
     },
     onError: err => {
-      console.log(err);
+      // console.log(err);
     },
 
     retry: false,

@@ -23,7 +23,7 @@ export default function LoginUsername() {
   });
 
   const onFinish = async values => {
-    console.log(values);
+    // console.log(values);
     setLoading(true);
 
     secureLocalStorage.setItem('email', JSON.stringify(values));

@@ -357,13 +357,13 @@ export default function ManageUsers() {
     // const encryptedData = key.encrypt(plaintext, 'base64');
     // setEncrypted(encryptedData);
 
-    console.log({ key: key, iv: iv });
+    // console.log({ key: key, iv: iv });
 
     const encrypted = CryptoJS.AES.encrypt(inputText, key, {
       iv: iv,
     }).toString();
     setOutputText(encrypted);
-    console.log(encrypted);
+    // console.log(encrypted);
   };
 
   // Function to filter the data based on the search query
@@ -426,33 +426,33 @@ export default function ManageUsers() {
     // const decryptedData = key.decrypt(encrypted, 'utf8');
     // setDecrypted(decryptedData);
 
-    console.log({ key: key, iv: iv });
-    console.log(outputText);
+    // console.log({ key: key, iv: iv });
+    // console.log(outputText);
 
     const decrypted = CryptoJS.AES.decrypt(outputText, key, {
       iv: iv,
     }).toString(CryptoJS.enc.Utf8);
     setOutputText(decrypted);
-    console.log(decrypted);
+    // console.log(decrypted);
   };
 
   // rsa end
 
-  const onSearch = value => console.log(value);
+  const onSearch = value => // console.log(value);
   const handleChange = value => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
 
   const onChange = e => {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   };
 
   const onFinish = values => {
-    console.log('Success:', values);
+    // console.log('Success:', values);
   };
 
   const onChangeCheck = e => {
-    console.log('radio checked', e.target.value);
+    // console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
 
@@ -525,9 +525,9 @@ export default function ManageUsers() {
       const { data } = await axios(url, {
         headers: { Accept: 'application/json' },
       });
-      console.log(data);
+      // console.log(data);
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
     }
   };
 

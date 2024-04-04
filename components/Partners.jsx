@@ -43,7 +43,7 @@ export default function Partners() {
   const onSearch = value => {
     setPage(1);
     setSearch(value);
-    // console.log({ searchvalue: value });
+    // // console.log({ searchvalue: value });
   };
 
   const columns = [
@@ -127,7 +127,7 @@ export default function Partners() {
 
   const lastPgae = () => {
     if (page <= 1) {
-      console.log('no more page');
+      // console.log('no more page');
       return;
     } else {
       setPage(prevState => prevState - 1);
@@ -136,13 +136,13 @@ export default function Partners() {
 
   const nextPgae = () => {
     if (page => transactiontypes?.pagination[0]?.totalPages) {
-      console.log('no more pages');
+      // console.log('no more pages');
       return;
     } else {
       setPage(prevState => prevState + 1);
-      console.log(page);
+      // console.log(page);
     }
-    console.log('yeah');
+    // console.log('yeah');
   };
 
   const addPartner = async values => {
@@ -154,7 +154,7 @@ export default function Partners() {
       }),
     };
 
-    console.log({ payload });
+    // console.log({ payload });
 
     try {
       const res = await api.post(
@@ -169,12 +169,12 @@ export default function Partners() {
         }
       );
 
-      console.log({ res });
+      // console.log({ res });
 
       toast.success(res?.data?.message);
       setModalAddPartner(false);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setSubmitLoading(false);
       getParters();
@@ -182,7 +182,7 @@ export default function Partners() {
   };
 
   const editPartner = async values => {
-    // console.log(values);
+    // // console.log(values);
     setSubmitLoading(true);
     const payload = {
       remote: jsonToHex({
@@ -192,7 +192,7 @@ export default function Partners() {
       }),
     };
 
-    console.log({ payload });
+    // console.log({ payload });
 
     try {
       const res = await api.put(
@@ -207,12 +207,12 @@ export default function Partners() {
         }
       );
 
-      console.log({ res });
+      // console.log({ res });
 
       toast.success(res?.data?.message);
       setModalEditPartners(false);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setSubmitLoading(false);
       getParters();
@@ -229,7 +229,7 @@ export default function Partners() {
       }),
     };
 
-    console.log({ payload });
+    // console.log({ payload });
 
     try {
       const res = await api.put(
@@ -244,11 +244,11 @@ export default function Partners() {
         }
       );
 
-      console.log({ res });
+      // console.log({ res });
 
       toast.success(res?.data?.message);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setSubmitLoading(false);
       setModalEditPartners(false);
@@ -277,10 +277,10 @@ export default function Partners() {
             '68457553374b4a676e2b574452596d4b4c3439724737707341434e3652423834466775463033674637624e636d526662614c6e697774646a394e42697473534e785878483852416d2b577551617434743453496137505664342b75776b546e5168313350653876343672666b4848674577626864792b77676b47734761356e456d59767632666b486b3342576a6e394945564364416d4f7a4e50576d5337726b4f443774617a662f7036616142784766685479655133696734446f6c684d6e6c4449377857486d794d6463614963497a386d755551474a7a417447367a34314b69456a4179516a79623262306a37477957332b74496f392f50393559505a6137537a62656e4d2b665a446644564957555872556351734d737269637651536746546b714f42656b674b61542f566165527346473031672b6f346238462f4c54694b6346514567354c682b5470566e65777770487553773d3d',
         }
       );
-      console.log(res);
+      // console.log(res);
       setPartnersData(res?.data?.response);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setLoading(false);
     }

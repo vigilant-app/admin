@@ -25,7 +25,7 @@ export default function Cards() {
   const [totalRecoveries, setTotalRecoveries] = useState("--")
   const { user } = OverlayContext();
   const token = Cookies.get('token');
-  console.log(totalUsers, totalAdminUsers, totalIncidents, totalRecoveries)
+  // console.log(totalUsers, totalAdminUsers, totalIncidents, totalRecoveries)
 
   useEffect(() => {
     // Fetch data when the component mounts

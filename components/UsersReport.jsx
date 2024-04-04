@@ -38,15 +38,15 @@ export default function UsersReport() {
   const [indeterminate2, setIndeterminate2] = useState(true);
 
   const onChange = e => {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   };
 
   const handleChange = value => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
 
   const onFinish = values => {
-    console.log('Success:', values);
+    // console.log('Success:', values);
   };
 
   const plainOptions = [

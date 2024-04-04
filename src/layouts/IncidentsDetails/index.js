@@ -41,7 +41,7 @@ export default function IncidentsDetails({ incidentId }) {
       setIncidentData(data?.data[0]);
     },
     onError: err => {
-      console.log(err);
+      // console.log(err);
     },
     retry: false,
     refetchInterval: Infinity,

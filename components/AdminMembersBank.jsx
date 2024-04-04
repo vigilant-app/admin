@@ -55,7 +55,7 @@ export default function AdminMembersBank() {
   const [formEdit] = Form.useForm();
 
   const onFinish = async values => {
-    console.log('Success:', values);
+    // console.log('Success:', values);
     let payload = {
       // startDate: moment(values?.stateData).format('YYYY-MM-DD'),
       // endDate: moment(values?.endDate).format('YYYY-MM-DD'),
@@ -104,7 +104,7 @@ export default function AdminMembersBank() {
             }
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
@@ -146,7 +146,7 @@ export default function AdminMembersBank() {
             }
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
@@ -179,7 +179,7 @@ export default function AdminMembersBank() {
   };
 
   const onChange = e => {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   };
 
   const columns = [
@@ -293,10 +293,10 @@ export default function AdminMembersBank() {
       }
 
       setLoading(false);
-      console.log(res);
+      // console.log(res);
       setBanksData(res?.data?.response);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setLoading(false);
     }
@@ -316,7 +316,7 @@ export default function AdminMembersBank() {
   // add bank function
 
   const addNewBank = async values => {
-    console.log('Success:', values);
+    // console.log('Success:', values);
     // const body = { ...values, bankLogoUrl };
     setSubmitLoading(true);
     const payload = {
@@ -334,10 +334,10 @@ export default function AdminMembersBank() {
             '68457553374b4a676e2b574452596d4b4c3439724737707341434e3652423834466775463033674637624e636d526662614c6e697774646a394e42697473534e785878483852416d2b577551617434743453496137505664342b75776b546e5168313350653876343672666b4848674577626864792b77676b47734761356e456d59767632666b486b3342576a6e394945564364416d4f7a4e50576d5337726b4f443774617a662f7036616142784766685479655133696734446f6c684d6e6c4449377857486d794d6463614963497a386d755551474a7a417447367a34314b69456a4179516a79623262306a37477957332b74496f392f50393559505a6137537a62656e4d2b665a446644564957555872556351734d737269637651536746546b714f42656b674b61542f566165527346473031672b6f346238462f4c54694b6346514567354c682b5470566e65777770487553773d3d',
         }
       );
-      console.log(res);
+      // console.log(res);
       toast.success(res?.data?.message);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setSubmitLoading(false);
       setModalAddMember(false);
@@ -348,8 +348,8 @@ export default function AdminMembersBank() {
   // edit bank function
 
   const editBank = async values => {
-    console.log('Success:', values);
-    console.log(editBankLogoUrl);
+    // console.log('Success:', values);
+    // console.log(editBankLogoUrl);
 
     setSubmitLoading(true);
 
@@ -364,7 +364,7 @@ export default function AdminMembersBank() {
       }),
     };
 
-    console.log(payload);
+    // console.log(payload);
 
     try {
       const res = await api.put(
@@ -380,7 +380,7 @@ export default function AdminMembersBank() {
       );
       toast.success(res?.data?.message);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setSubmitLoading(false);
     }
@@ -401,7 +401,7 @@ export default function AdminMembersBank() {
   // update status function
 
   const updateBanks = async (checked, editData) => {
-    console.log(`switch to ${checked}`);
+    // console.log(`switch to ${checked}`);
 
     setBanksData(prevState => ({
       ...prevState,
@@ -422,7 +422,7 @@ export default function AdminMembersBank() {
       }),
     };
 
-    console.log(payload);
+    // console.log(payload);
 
     // return;
 
@@ -438,10 +438,10 @@ export default function AdminMembersBank() {
             '68457553374b4a676e2b574452596d4b4c3439724737707341434e3652423834466775463033674637624e636d526662614c6e697774646a394e42697473534e785878483852416d2b577551617434743453496137505664342b75776b546e5168313350653876343672666b4848674577626864792b77676b47734761356e456d59767632666b486b3342576a6e394945564364416d4f7a4e50576d5337726b4f443774617a662f7036616142784766685479655133696734446f6c684d6e6c4449377857486d794d6463614963497a386d755551474a7a417447367a34314b69456a4179516a79623262306a37477957332b74496f392f50393559505a6137537a62656e4d2b665a446644564957555872556351734d737269637651536746546b714f42656b674b61542f566165527346473031672b6f346238462f4c54694b6346514567354c682b5470566e65777770487553773d3d',
         }
       );
-      console.log(res);
+      // console.log(res);
       toast.success(res?.data?.message);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setLoading(false);
 

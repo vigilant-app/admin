@@ -30,7 +30,7 @@ export default function AppConfiguration({ admin, heading }) {
 `;
 
   const onChange = key => {
-    console.log(key);
+    // console.log(key);
   };
 
   function customItemRenderer(item) {

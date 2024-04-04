@@ -24,26 +24,26 @@
 //   const [editAction, setEditAction] = useState(true);
 //   const [value, setValue] = useState('all');
 
-//   const onSearch = value => console.log(value);
+//   const onSearch = value => // console.log(value);
 
 //   const onChange = e => {
-//     console.log(`checked = ${e.target.checked}`);
+//     // console.log(`checked = ${e.target.checked}`);
 //   };
 
 //   const checkChange = checked => {
-//     console.log(`switch to ${checked}`);
+//     // console.log(`switch to ${checked}`);
 //   };
 
 //   const handleChange = value => {
-//     console.log(`selected ${value}`);
+//     // console.log(`selected ${value}`);
 //   };
 
 //   const onFinish = values => {
-//     console.log('Success:', values);
+//     // console.log('Success:', values);
 //   };
 
 //   const onChangeCheck = e => {
-//     console.log('radio checked', e.target.value);
+//     // console.log('radio checked', e.target.value);
 //     setValue(e.target.value);
 //   };
 

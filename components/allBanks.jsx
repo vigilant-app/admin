@@ -38,7 +38,7 @@ export default function AllBanks() {
     pageSize: 10,
     current: 1,
   });
-  console.log(data);
+  // console.log(data);
   const [searchQuery, setSearchQuery] = useState(""); // Add searchQuery state
   const [filteredData, setFilteredData] = useState(data); // Add filteredData state
 
@@ -79,14 +79,14 @@ export default function AllBanks() {
   };
 
   //Legacy Code base
-  //const onSearch = value => console.log(value);
+  //const onSearch = value => // console.log(value);
 
   const onChange = (e) => {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   };
 
   const onChangeCheck = (e) => {
-    console.log("radio checked", e.target.value);
+    // console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
 
@@ -100,7 +100,7 @@ export default function AllBanks() {
 
   const onSearch = (value) => {
     // Handle search button click or use this value for any specific action.
-    // You can remove the console.log if not needed.
+    // You can remove the // console.log if not needed.
     setSearchQuery(value); // Update searchQuery state with the entered query
   };
 
@@ -153,7 +153,9 @@ export default function AllBanks() {
       key: "bank_logo_url",
       render: (text) => (
         <div>
-          <Image src={text === null  ? defImg : text} alt="img" width={30} height={30} />
+          {
+            text === null ? <Image src={text === null  ? defImg : text} alt="img" width={30} height={30} /> : <Image src={text === null  ? defImg : text} alt="img" width={80} height={80} />
+          }
         </div>
       ),
     },
@@ -183,7 +185,7 @@ export default function AllBanks() {
     try {
       const response = await axios.post(apiUrl, payload);
       // Handle the response here (e.g., show a success message)
-      // console.log("API Response:", response.data);
+      // // console.log("API Response:", response.data);
     } catch (error) {
       // Handle errors (e.g., show an error message)
       // console.error("API Error:", error);
