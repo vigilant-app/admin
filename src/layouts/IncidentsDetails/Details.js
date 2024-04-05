@@ -333,7 +333,8 @@ export default function Details({ data, incidentId }) {
             <div className="col-6">
               <h4>Bank ID</h4>
               <p>{data?.bank?.bank_id}</p>
-              {console.log(data)}
+              <h4>Account Number</h4>
+              <p>{data?.bank?.account_number}</p>
               <h4>Reported By:</h4>
               <p>
                 {data?.user?.first_name} {data?.user?.last_name}
@@ -347,6 +348,11 @@ export default function Details({ data, incidentId }) {
             </div>
 
             <div className="col-6">
+              <h4>Bank</h4>
+              <p>{data?.bank?.bank_name}</p>
+              <h4>Account Holder's Name</h4>
+              <p>{data?.bank?.account_name}</p>
+
               <h4>Date</h4>
               <p>{data?.incident?.created_at}</p>
 
@@ -585,7 +591,7 @@ export default function Details({ data, incidentId }) {
                       {item?.label}
                     </Radio>
                   ))
-                  : user?.entity_id == 4
+                  : user?.entity_id == adminEnum.BANK
                     // && user?.role?.entity_id == 2
 
                     ? BankAssignOption?.map((item, index) => (

@@ -15,12 +15,18 @@ import {
     Button,
     message,
 } from 'antd';
+import secureLocalStorage from "react-secure-storage";
+import axios from "axios";
+import { BASE_URL } from "../utility/constants";
+import { toast } from "sonner";
+import { useRouter } from "next/router";
 
 function CreateRef() {
     return useRef(null);
 }
 
 const OTPField = () => {
+    const router = useRouter();
     const [otp, setOtp] = useState(new Array(6).fill(""));
     const [activeOTPIndex, setActiveOTPIndex] = useState(0);
     const [loading, setLoading] = useState(false);
@@ -28,6 +34,7 @@ const OTPField = () => {
     const [sunmitLoading, setSunmitLoading] = useState(false);
     const [useRecoveryCode, setUseRecoveryCode] = useState(false);
 
+    const user_id = JSON.parse(secureLocalStorage.getItem('user')).id
 
     // const inputRefs = Array.from({ length: 6 }, () => useRef(null));
 
@@ -36,7 +43,7 @@ const OTPField = () => {
     const inputRefs = Array.from({ length: 6 }, CreateRef);
 
 
-    const handleOnChange = ({ target }, index) => {
+    const handleOnChange = async ({ target }, index) => {
         const { value } = target;
         const newOTP = [...otp];
         newOTP[index] = value.substring(value.length - 1);
@@ -46,10 +53,20 @@ const OTPField = () => {
             setActiveOTPIndex((prevIndex) =>
                 prevIndex < otp.length - 1 ? prevIndex + 1 : prevIndex
             );
-
-
             if (index === otp.length - 1) {
                 setLoading(true);
+                const code = newOTP.join("")
+                await axios.post(`${BASE_URL}/user/confirm-otp`, {
+                    user_id,code
+              })
+              .then(response => {
+                toast.success("Login successful")
+                response.data.data && router.push("/dashboard");
+              })
+              .catch(error => {
+                console.error(error)
+              });
+              setLoading(false);
             }
         }
     };
@@ -81,13 +98,13 @@ const OTPField = () => {
         <div className="Login-page container-fluid">
             <div className="row">
                 <div className="col-auto">
-                    <h5 className="text-center token">Enter Token</h5>
+                    <h5 className="text-center token">Enter OTP</h5>
                     {otp.map((_, index) => (
                         <React.Fragment key={index}>
                             <input
                                 ref={inputRefs[index]}
                                 className={`custom-input ${otp[index] ? 'input-with-value' : 'input-without-value'}`}
-                                type="number"
+                                type="text"
                                 style={{
                                     width: "50px",
                                     height: "50px",
@@ -95,6 +112,7 @@ const OTPField = () => {
                                     outline: "none",
                                     textAlign: "center",
                                     fontWeight: "bold",
+                                    background:"#e5e7eb",
                                     fontSize: "24px",
                                     transition: "border-color 0.3s, color 0.3s",
                                     marginRight: "12px",
@@ -121,18 +139,18 @@ const OTPField = () => {
                         </div>
                     )}
 
-
+                        {/* // TODO : add count down */}
                     {/* <p className="text-center no-otp">
-                        Didn’t receive token? <span className="no-otp-snap">00:59</span>
+                        Didn’t receive otp? <span className="no-otp-snap">00:59</span>
                     </p> */}
-                    <div className="d-flex justify-content-center item-content-center">
+                    {/* <div className="d-flex justify-content-center item-content-center">
                         <Radio
                             checked={useRecoveryCode}
                             onChange={() => setUseRecoveryCode(!useRecoveryCode)}
                         >
                             Use Recovery Code
                         </Radio>
-                    </div>
+                    </div> */}
 
 
 

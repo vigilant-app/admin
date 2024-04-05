@@ -51,6 +51,7 @@ export default function TransactionReports() {
   const { user } = OverlayContext();
   const idString = user?.role.abilities.map(status => status.id).join(',')
 
+
   
   const handleSearchInputChange = e => {
     setSearchQuery(e.target.value);
@@ -180,7 +181,7 @@ export default function TransactionReports() {
         : user?.entity_id === adminEnum.NPF
           ? api.fetchNPFIncidents(null, idString)
           : user?.entity_id === adminEnum.BANK
-            ? api.fetchBanksIncidentByStatuses(null, user?.bank_id, user?.role.abilities[0].id)
+            ? api.fetchBanksIncidentByStatuses(null, user?.bank_id, user?.role.role_statuses[0].id)
             : "";
     },
     onSuccess: data => {

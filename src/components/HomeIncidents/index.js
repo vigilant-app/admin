@@ -111,12 +111,13 @@ export default function HomeIncidents() {
   const { data: fetchIncidents, isLoading: loadingIncidents } = useQuery({
     queryKey: ['get_incidents', search_query],
     queryFn: () => {
+      console.log(user);
       return user?.entity_id === adminEnum.NPF
         ? api.fetchNPFIncidents(null, idString)
         : user?.entity_id === adminEnum.VIGILANT
           ? api.fetchIncidents(null, { search_query })
           : user?.entity_id === adminEnum.BANK
-            ? api.fetchBanksIncidentByStatuses(null, user?.bank_id, user?.role.abilities[0].id)
+            ? api.fetchBanksIncidentByStatuses(null, user?.bank_id, user?.role.role_statuses[0].id)
             : '';
     },
     onSuccess: data => {
