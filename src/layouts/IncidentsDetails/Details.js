@@ -526,7 +526,7 @@ export default function Details({ data, incidentId }) {
               },
             ]}
           >
-            <Input.TextArea placeholder="Enter note" row={10} value={customerMessage} onChange={handleCustomerMessageChange} />
+            <Input.TextArea placeholder="Enter note" row={10} value={customerMessage} onChange={handleCustomerMessageChange} />   
           </Form.Item>
 
           <div className="pt-lg-5 pt-4">
@@ -594,7 +594,7 @@ export default function Details({ data, incidentId }) {
                   : user?.entity_id == adminEnum.BANK
                     // && user?.role?.entity_id == 2
 
-                    ? BankAssignOption?.map((item, index) => (
+                    ? BankAssignOption?.filter(el => el.value !== user.role.role_statuses[0].id ).map((item, index) => (
                       <Radio value={item?.value} key={index}>
                         {item?.label}
                       </Radio>

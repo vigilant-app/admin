@@ -22,6 +22,7 @@ import { BASE_URL } from "../../../utility/constants";
 import { approveAdminId } from "../../../apis";
 import Cookies from 'js-cookie';
 import { OverlayContext } from "../../../components/Layout";
+import { useEffect, useState } from "react";
 
 
 
@@ -31,8 +32,8 @@ import { OverlayContext } from "../../../components/Layout";
 export default function Details({ data }) {
     const { user } = OverlayContext();
     const router = useRouter();
-    const statusValue = data[0]?.is_active === 1 ? "Active" : "Inactive";
-    const statusColor = data[0]?.is_active === 1 ? "green" : "red";
+    const [isApproved,setIsApproved] = useState(data[0]?.is_approved)
+    
     const token = Cookies.get('token');
 
 
@@ -40,12 +41,20 @@ export default function Details({ data }) {
         try {
             const adminData = await approveAdminId(token, router.query?.adminId);
             toast.success(adminData.message);
-            window.location.reload();
+            setIsApproved(1)
         } catch (error) {
             console.error('Error fetching admin:', error);
         }
     }
 
+    useEffect(() => {
+      setIsApproved(data[0]?.is_approved)
+    }, [data])
+
+
+    const statusValue = isApproved === 1 ? "Active" : "Inactive";
+    const statusColor = isApproved === 1 ? "green" : "red";
+    
 
     return (
         <DetailsWrapper>
@@ -77,10 +86,11 @@ export default function Details({ data }) {
                 </div>
 
 
-                {user?.role_id === 11 && <div className="d-flex gap-5">
+                {user?.role_id === 10 && <div className="d-flex gap-5">
                     <Button
                         danger
-                        style={{ background: '#7D0003', color: '#FFF' }}
+                        disabled={isApproved === 1}
+                        style={isApproved === 1?{}:{ background: '#7D0003', color: '#FFF' }}
                         onClick={fetchAdminData}
                     >
                         Approve User
@@ -88,7 +98,8 @@ export default function Details({ data }) {
 
                     <Button
                         danger
-                        style={{ background: '#7D0003', color: '#FFF' }}
+                        disabled={isApproved === 1}
+                        style={isApproved !== 1?{}:{ background: '#7D0003', color: '#FFF' }}
                     >
                         Decline
                     </Button>

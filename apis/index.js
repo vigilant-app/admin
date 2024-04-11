@@ -84,12 +84,12 @@ export const fetchAdminId = async (token, id) => {
   return response.data;
 };
 
-export const approveAdminId = async (token, id) => {
+export const approveAdminId = async (token, user_id) => {
   const headers = {
     Authorization: `Bearer ${token}`,
   };
 
-  const response = await axios.get(`${BASE_URL}/admin/approve-user/${id}`, { headers });
+  const response = await axios.get(`${BASE_URL}/user/approve-admin-user/${user_id}`, { headers });
   return response.data;
 };
 
@@ -102,6 +102,19 @@ export const fetchAllBanks = async (token) => {
   const response = await axios.get(`${BASE_URL}/bank/banks`, { headers });
   return response.data;
 };
+
+
+
+export const entityDepartment = async (token) => {
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  const response = await axios.get(`${BASE_URL}/entity/departments`, { headers });
+  return response.data;
+};
+
+
 
 
 export const fetchAllAdminUsers = async (token) => {

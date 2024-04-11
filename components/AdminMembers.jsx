@@ -18,13 +18,15 @@ import {
   Switch,
 } from "antd";
 import { SearchIcon, FilterIcon, DirLeft, DirRight } from "../utility/svg";
-import api from "../apis";
+import api, { entityDepartment, fetchAllBanks } from "../apis";
 import { BASE_URL } from "../utility/constants";
 
 import { fetchAllAdminUsers } from "../apis";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { OverlayContext } from "./Layout";
+import { companyEnum } from "../utility/enum";
+import { adminEnum } from "../src/enum/entity";
 
 export default function AdminMembers() {
   const { user } = OverlayContext();
@@ -38,6 +40,8 @@ export default function AdminMembers() {
   const [modalEditMember, setModalEditMember] = useState(false);
   const [value, setValue] = useState("all");
   const [data2, setData2] = useState([]);
+  const [bankList, setBankList] = useState([]);
+  const [entityList, setEntityList] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -89,10 +93,37 @@ export default function AdminMembers() {
       const fullName = `${user.first_name} ${user.last_name}`;
       return fullName.toLowerCase().includes(value.toLowerCase());
     });
-  
+
     // Update the data with the filtered results
     setData2(filteredData);
   };
+
+  const fetchBanks = async () => {
+    let bankArr = [];
+    const bankData = await fetchAllBanks(token)
+    bankData.data.forEach(element => {
+      bankArr.push({
+        value: element.id,
+        label: element.bank_name
+      })
+    });
+    setBankList(bankArr);
+  }
+
+  const fetchEnttityDepartmaent = async () => {
+    let entit = []
+    const entityDep = await entityDepartment(token)
+    entityDep.filter(el => {
+      return el.entity_id === adminEnum.BANK
+    }).forEach(data => {
+      entit.push({
+        value: data.id,
+        label: data.department_name
+      })
+    })
+
+    setEntityList(entit);
+  }
   
 
   const handleChange = (value) => {
@@ -124,6 +155,8 @@ export default function AdminMembers() {
     };
 
     fetchData();
+    fetchBanks()
+    fetchEnttityDepartmaent()
   }, [token]);
 
   const AddAdminUser = async (values) => {
@@ -135,7 +168,7 @@ export default function AdminMembers() {
     // );
 
     setSunmitLoading(true);
-   
+
     const headers = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json", // Adjust content type if needed
@@ -148,7 +181,10 @@ export default function AdminMembers() {
       password: "admin",
       entity_id: values.entity_id,
       role_id: values.role_id,
+      bank_id: values.bank_id,
+      entity_department_id:values.entity_department_id,
     };
+    console.log(payload);
     try {
       const res = await api.post2(
         `${BASE_URL}/user/register-admin`,
@@ -220,8 +256,8 @@ export default function AdminMembers() {
 
     {
       title: "status",
-      dataIndex: "is_active",
-      key: "is_active",
+      dataIndex: "is_approved",
+      key: "is_approved",
       render: (text) => {
         const statusText = text === 1 ? "Active" : "Inactive";
         const statusColor = text === 1 ? "green" : "red";
@@ -242,45 +278,6 @@ export default function AdminMembers() {
     },
   ];
 
-  // const columns = [
-  //   {
-  //     title: 'Username',
-  //     dataIndex: 'username',
-  //     key: 'username',
-  //   },
-  //   {
-  //     title: 'Company',
-  //     dataIndex: 'company',
-  //     key: 'company',
-  //     render: text => <span className="max-content">{text}</span>,
-  //   },
-  //   {
-  //     title: 'Role Access',
-  //     dataIndex: 'role',
-  //     key: 'role',
-  //     render: text => <div className="max-content">{text}</div>,
-  //   },
-  //   {
-  //     title: 'Status',
-  //     dataIndex: 'status',
-  //     key: 'status',
-  //     render: text => (
-  //       <div>
-  //         <span className={`user-status ${text}`}>{text}</span>
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     title: 'Date Created',
-  //     dataIndex: 'DateTime',
-  //     key: 'DateTime',
-  //   },
-  //   {
-  //     title: ' ',
-  //     dataIndex: 'views',
-  //     key: 'views',
-  //   },
-  // ];
 
   const handleRowClick = (record) => {
     router.push(`/admin-details/${record?.id}`);
@@ -316,7 +313,7 @@ export default function AdminMembers() {
                 background: "#fff",
                 border: "1px solid #7D0003",
               }}
-              // onClick={() => openModal()}
+            // onClick={() => openModal()}
             >
               Manage Roles
             </Button>
@@ -334,8 +331,8 @@ export default function AdminMembers() {
             </Button> */}
 
             {user?.role_id === 11 ||
-            user?.role_id === 13 ||
-            user?.role_id === 2 ? (
+              user?.role_id === 13 ||
+              user?.role_id === 2 ? (
               <Button
                 icon={<AddIcon />}
                 style={{ background: "#7D0003", color: "#fff" }}
@@ -641,18 +638,6 @@ export default function AdminMembers() {
               onChange={handleChange}
               options={[
                 {
-                  value: 1,
-                  label: "CBN",
-                },
-                {
-                  value: 2,
-                  label: "NPF",
-                },
-                {
-                  value: 3,
-                  label: "VIGILANT",
-                },
-                {
                   value: 4,
                   label: "BANK",
                 },
@@ -660,22 +645,30 @@ export default function AdminMembers() {
             />
           </Form.Item>
 
+          <Form.Item name="entity_department_id" label="Entity Department">
+            <Select
+              style={{
+                width: "100%",
+              }}
+              onChange={handleChange}
+              options={[...entityList]}
+            />
+          </Form.Item>
+
+          <Form.Item name="bank_id" label="Bank">
+            <Select
+              style={{
+                width: "100%",
+              }}
+              onChange={handleChange}
+              options={[...bankList]}
+            />
+          </Form.Item>
+
           <Form.Item name="role_id" label="Role access">
             <Select
               onChange={handleChange}
               options={[
-                {
-                  value: 1,
-                  label: "CBN",
-                },
-                {
-                  value: 2,
-                  label: "Vigilant Customer Service",
-                },
-                {
-                  value: 3,
-                  label: "NPF investigator",
-                },
                 {
                   value: 4,
                   label: "Bank Fraud Desk",
@@ -699,10 +692,6 @@ export default function AdminMembers() {
                 {
                   value: 9,
                   label: "Bank Internal Audit",
-                },
-                {
-                  value: 10,
-                  label: "NPF prosecutor",
                 },
                 {
                   value: 10,
