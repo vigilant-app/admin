@@ -92,9 +92,6 @@ export default function BreadCrumb({ tab, location }) {
                   </div>
                 </div>
               </li>
-              {
-                console.log(user)
-              }
               {[11, 12, 13, 14,10].includes(user?.role_id) && (
                 <>
                   <li

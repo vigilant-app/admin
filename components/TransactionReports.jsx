@@ -185,7 +185,6 @@ export default function TransactionReports() {
             : "";
     },
     onSuccess: data => {
-      console.log("incidents",data);
       const mappedIncidents = data?.data?.map((incident, index) => ({
         key: index,
         incidents: index + 1,
