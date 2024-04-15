@@ -79,12 +79,10 @@ export default function Details({ data }) {
                     <p>{data[0]?.role?.name}</p>
                 </div>
 
-
                 <div className="d-flex gap-5">
                     <h4>Status:</h4>
                     <p style={{ color: statusColor }}>• {statusValue}</p>
                 </div>
-
 
                 {user?.role_id === 10 && <div className="d-flex gap-5">
                     <Button

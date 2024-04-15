@@ -19,17 +19,20 @@ import {
   Button,
   message,
 } from 'antd';
-import { VigilantAssignOption, BankAssignOption, ProsecutorAssignOption } from '../../../utility/enum';
+import { VigilantAssignOption, BankAssignOption, ProsecutorAssignOption, companyEnum } from '../../../utility/enum';
 import { OverlayContext } from '../../../components/Layout';
-import api from '../../../apis';
+import api, { entityDepartment } from '../../../apis';
 import { BASE_URL } from '../../../utility/constants';
 import Cookies from 'js-cookie';
 import { adminEnum } from '../../enum/entity';
 
 export default function Details({ data, incidentId }) {
+  const [NPFdepartments, setNPFDepartment] = useState([])
+  const [selectedAdmin, setSelectedAdmin] = useState("")
   const [incidentModal, setIncidentModal] = useState(false);
   const [voidModal, setVoidModal] = useState(false);
   const [banksModal, setBanksModal] = useState(false);
+  const [policeDept, setPoliceDept] = useState([])
   const [NPFModal, setNPFModal] = useState(false);
   const [arrestModal, setArrestModal] = useState(false);
   const [sunmitLoading, setSunmitLoading] = useState(false);
@@ -65,7 +68,24 @@ export default function Details({ data, incidentId }) {
 
 
 
+  const fetchdepartments = async () => {
+    let data = []
+    await entityDepartment().then(e => {
+      const NPFDept = e.filter(x => { return x.entity_id === adminEnum.NPF })
+      NPFDept.forEach(element => {
+        data.push({
+          id: element.id,
+          value: element.department_name
+        })
+      });
+      setPoliceDept([...NPFDept])
+    })
+    setNPFDepartment([...data])
+  }
 
+  useEffect(() => {
+    fetchdepartments()
+  }, [])
 
 
   // // console.log("ENTITY:", user.entity_id)
@@ -86,6 +106,13 @@ export default function Details({ data, incidentId }) {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json', // Adjust content type if needed
     };
+
+    if (values.entity === VigilantAssignOption[1].value) {
+      const dept = policeDept.filter(xr => xr.department_name === values.NPFentity)
+      values.entity = dept[0].department_incident_status_id
+      // values.entity = policeDept.department_incident_status_id
+      // get the selected option and let it be the new values.entity value
+    }
     const payload = {
       new_incident_status_id: values.entity,
     };
@@ -123,7 +150,7 @@ export default function Details({ data, incidentId }) {
     } catch (error) {
       console.error(error);
     } finally {
-      setSunmitLoading(false);
+    setSunmitLoading(false);
       setIncidentModal(false)
     }
   };
@@ -505,7 +532,7 @@ export default function Details({ data, incidentId }) {
             <Radio.Group>
               <Space direction="vertical">
                 {VigilantAssignOption?.map((item, index) => (
-                  <Radio value={item?.value} key={index}>
+                  <Radio onChange={e => setSelectedAdmin(e.target.value)} value={item?.value} key={index}>
                     {item?.label}
                   </Radio>
                 ))
@@ -513,7 +540,18 @@ export default function Details({ data, incidentId }) {
               </Space>
             </Radio.Group>
           </Form.Item>
-
+          {
+            selectedAdmin === VigilantAssignOption[1].value && <div>
+              <Form.Item name="NPFentity" label="NPF Department">
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  options={[...NPFdepartments]}
+                />
+              </Form.Item>
+            </div>
+          }
           <Form.Item
             name="note"
             label="Note"
@@ -526,7 +564,7 @@ export default function Details({ data, incidentId }) {
               },
             ]}
           >
-            <Input.TextArea placeholder="Enter note" row={10} value={customerMessage} onChange={handleCustomerMessageChange} />   
+            <Input.TextArea placeholder="Enter note" row={10} value={customerMessage} onChange={handleCustomerMessageChange} />
           </Form.Item>
 
           <div className="pt-lg-5 pt-4">
@@ -594,7 +632,7 @@ export default function Details({ data, incidentId }) {
                   : user?.entity_id == adminEnum.BANK
                     // && user?.role?.entity_id == 2
 
-                    ? BankAssignOption?.filter(el => el.value !== user.role.role_statuses[0].id ).map((item, index) => (
+                    ? BankAssignOption?.filter(el => el.value !== user.role.role_statuses[0].id).map((item, index) => (
                       <Radio value={item?.value} key={index}>
                         {item?.label}
                       </Radio>
