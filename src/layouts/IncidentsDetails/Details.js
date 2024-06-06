@@ -377,7 +377,7 @@ export default function Details({ data, incidentId }) {
             <div className="col-6">
               <h4>Bank</h4>
               <p>{data?.bank?.bank_name}</p>
-              <h4>Account Holder's Name</h4>
+              <h4>Account Holder&apos;s Name</h4>
               <p>{data?.bank?.account_name}</p>
 
               <h4>Date</h4>
