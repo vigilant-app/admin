@@ -124,7 +124,7 @@ export default function AdminMembers() {
 
     setEntityList(entit);
   }
-  
+
 
   const handleChange = (value) => {
     // console.log(`selected ${value}`);
@@ -182,7 +182,7 @@ export default function AdminMembers() {
       entity_id: values.entity_id,
       role_id: values.role_id,
       bank_id: values.bank_id,
-      entity_department_id:values.entity_department_id,
+      entity_department_id: values.entity_department_id,
     };
     console.log(payload);
     try {
@@ -330,8 +330,10 @@ export default function AdminMembers() {
               Add User
             </Button> */}
 
-            {user?.role_id === 11 ||
+            {user?.role_id === 10 ||
               user?.role_id === 13 ||
+              user?.role_id === 1 ||
+              user?.role_id === 12 ||
               user?.role_id === 2 ? (
               <Button
                 icon={<AddIcon />}
@@ -630,76 +632,229 @@ export default function AdminMembers() {
             />
           </Form.Item>
 
-          <Form.Item name="entity_id" label="Entity">
-            <Select
-              style={{
-                width: "100%",
-              }}
-              onChange={handleChange}
-              options={[
-                {
-                  value: 4,
-                  label: "BANK",
-                },
-              ]}
-            />
-          </Form.Item>
 
-          <Form.Item name="entity_department_id" label="Entity Department">
-            <Select
-              style={{
-                width: "100%",
-              }}
-              onChange={handleChange}
-              options={[...entityList]}
-            />
-          </Form.Item>
+          {
 
-          <Form.Item name="bank_id" label="Bank">
-            <Select
-              style={{
-                width: "100%",
-              }}
-              onChange={handleChange}
-              options={[...bankList]}
-            />
-          </Form.Item>
+            user?.role_id === 1 ? (
+              <Form.Item name="entity_id" label="Entity">
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 4,
+                      label: "VIGILANT",
+                    },
+                  ]}
+                />
+              </Form.Item>
+            ) : user?.role_id === 12 ? (
+              <Form.Item name="entity_id" label="Entity">
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 3,
+                      label: "NIBSS",
+                    },
+                    {
+                      value: 2,
+                      label: "NPF",
+                    }
+                  ]}
+                />
+              </Form.Item>
+            ) : (
+              <Form.Item name="entity_id" label="Entity">
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 5,
+                      label: "BANK",
+                    },
+                  ]}
+                />
+              </Form.Item>
+            )
+          }
 
-          <Form.Item name="role_id" label="Role access">
-            <Select
-              onChange={handleChange}
-              options={[
-                {
-                  value: 4,
-                  label: "Bank Fraud Desk",
-                },
-                {
-                  value: 5,
-                  label: "Bank Treasury",
-                },
-                {
-                  value: 6,
-                  label: "Bank Internal Control",
-                },
-                {
-                  value: 7,
-                  label: "Bank Risk",
-                },
-                {
-                  value: 8,
-                  label: "Bank Account",
-                },
-                {
-                  value: 9,
-                  label: "Bank Internal Audit",
-                },
-                {
-                  value: 10,
-                  label: "Bank Internal Control",
-                },
-              ]}
-            />
-          </Form.Item>
+
+          {
+            user?.role_id === 13 ? (
+              <Form.Item name="entity_department_id" label="Entity Department">
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={handleChange}
+                  options={[...entityList]}
+                />
+              </Form.Item>
+            ) : user?.role_id === 1 ? (
+              <Form.Item name="entity_department_id" label="Entity Department">
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 12,
+                      label: "Vigilant Inputer",
+                    },
+                    {
+                      value: 13,
+                      label: "Vigilant Verifer",
+                    }
+                  ]}
+                />
+              </Form.Item>
+            ) : user?.role_id === 12 ? (
+              <Form.Item name="entity_department_id" label="Entity Department">
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 10,
+                      label: "NIBSS Inputer",
+                    },
+                    {
+                      value: 11,
+                      label: "NIBSS Verifer",
+                    },
+                    {
+                      value: 12,
+                      label: "NPF Inputer",
+                    },
+                    {
+                      value: 13,
+                      label: "NPF Verifer",
+                    }
+                  ]}
+                />
+              </Form.Item>
+            ) :  (
+              <Form.Item name="entity_department_id" label="Entity Department">
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={handleChange}
+                  options={[...entityList]}
+                />
+              </Form.Item>
+            )
+          }
+
+
+          {
+            user?.role_id === 10 && (
+              <Form.Item name="bank_id" label="Bank">
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={handleChange}
+                  options={[...bankList]}
+                />
+              </Form.Item>
+            )
+          }
+
+          {
+            user?.role_id === 10 ? (
+              <Form.Item name="role_id" label="Role access">
+                <Select
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 4,
+                      label: "Bank Fraud Desk",
+                    },
+                    {
+                      value: 5,
+                      label: "Bank Treasury",
+                    },
+                    {
+                      value: 6,
+                      label: "Bank Internal Control",
+                    },
+                    {
+                      value: 7,
+                      label: "Bank Risk",
+                    },
+                    {
+                      value: 8,
+                      label: "Bank Account",
+                    },
+                    {
+                      value: 9,
+                      label: "Bank Internal Audit",
+                    },
+                    {
+                      value: 10,
+                      label: "Bank Internal Control",
+                    },
+                  ]}
+                />
+              </Form.Item>
+            ) : user?.role_id === 12 ? (
+              <Form.Item name="role_id" label="Role access">
+                <Select
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 10,
+                      label: "NIBSS Inputer",
+                    },
+                    {
+                      value: 11,
+                      label: "NIBSS Verifer",
+                    },
+                    {
+                      value: 12,
+                      label: "NPF Inputer",
+                    },
+                    {
+                      value: 13,
+                      label: "NPF Verifer",
+                    }
+                  ]}
+                />
+              </Form.Item>
+
+            ) : (
+              <Form.Item name="role_id" label="Role access">
+                <Select
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 12,
+                      label: "Vigilant Inputer",
+                    },
+                    {
+                      value: 13,
+                      label: "Vigilant Verifer",
+                    }
+                  ]}
+                />
+              </Form.Item>
+
+            )
+          }
+
 
           <div className="pt-lg-5 pt-4">
             <Button

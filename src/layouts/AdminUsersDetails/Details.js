@@ -84,7 +84,7 @@ export default function Details({ data }) {
                     <p style={{ color: statusColor }}>• {statusValue}</p>
                 </div>
 
-                {user?.role_id === 10 && <div className="d-flex gap-5">
+                {user?.role_id === 11 && <div className="d-flex gap-5">
                     <Button
                         danger
                         disabled={isApproved === 1}

@@ -586,13 +586,11 @@ export default function ManageUsers() {
   return (
     <section>
 
+
+      
       <CSVLink data={data} filename={'exported-data.csv'}>
         <ExportZone h4="All Users" />
       </CSVLink>
-
-   
-
-    
     
 
       <div className="container search-filter">
