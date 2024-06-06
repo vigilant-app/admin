@@ -34,7 +34,7 @@ const OTPField = () => {
     const [sunmitLoading, setSunmitLoading] = useState(false);
     const [useRecoveryCode, setUseRecoveryCode] = useState(false);
 
-    const user_id = JSON.parse(secureLocalStorage.getItem('user')).id
+    const user_id = JSON.parse(secureLocalStorage.getItem('user'))?.id
 
     // const inputRefs = Array.from({ length: 6 }, () => useRef(null));
 
